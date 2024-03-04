@@ -186,8 +186,10 @@ public class OptimizerUtil {
         frameGrabber.start();
         long videoDuration = frameGrabber.getLengthInTime();
         if(videoDuration!=0)
-    			node.getMetadata().put(ContentAPIParams.duration.name(), 
+    			{
+    			    node.getMetadata().put(ContentAPIParams.duration.name(), 
     					TimeUnit.MICROSECONDS.toSeconds(videoDuration)+"");
+    			}
         long numberOfFrames = frameGrabber.getLengthInFrames();
         File thumbNail = null;
         try {

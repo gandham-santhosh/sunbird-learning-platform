@@ -76,7 +76,9 @@ public class Request implements Serializable {
     	    this.request_id = this.params.getMsgid();
     	}
     	if(StringUtils.isBlank(this.params.getMsgid()) && StringUtils.isNotBlank(request_id))
-    		this.params.setMsgid(request_id);
+    		{
+    		    this.params.setMsgid(request_id);
+    		}
         this.context.putAll(request.getContext());
     }
     

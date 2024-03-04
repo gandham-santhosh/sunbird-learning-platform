@@ -103,7 +103,9 @@ public class AssetsLicenseValidatorProcessor extends AbstractProcessor {
 		    		Map<String, Object> metadata = youtubeUrlManager.validateURL(src, "license");
 		    		boolean isValid = null != metadata.get("valid") ? (boolean)metadata.get("valid") : false;
 		    		if(!isValid)
-		    			throw new ClientException(ContentErrorCodeConstants.INVALID_YOUTUBE_MEDIA.name(), ContentErrorMessageConstants.LICENSE_NOT_SUPPORTED);
+		    			{
+		    			    throw new ClientException(ContentErrorCodeConstants.INVALID_YOUTUBE_MEDIA.name(), ContentErrorMessageConstants.LICENSE_NOT_SUPPORTED);
+		    			}
 		        break;
 		    }
         	    default:
