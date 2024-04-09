@@ -1,5 +1,6 @@
 package org.ekstep.content.tool;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -46,7 +47,7 @@ public class CloudStoreManager {
     }
 
     public boolean urlAvailable(String url) throws Exception {
-        Process p = Runtime.getRuntime().exec("curl -I " + url);
+        Process p = SystemCommand.runCommand(Runtime.getRuntime(), "curl -I " + url);
         String response = IOUtils.toString(p.getInputStream());
         return StringUtils.contains(response, "HTTP/1.1 200 OK");
     }
