@@ -1,5 +1,6 @@
 package org.ekstep.common.util;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +37,7 @@ public class UnzipUtility {
 		if (!destDir.exists()) {
 			destDir.mkdir();
 		}
-		ZipInputStream zipIn = new ZipInputStream(in);
+		ZipInputStream zipIn = ZipSecurity.createHardenedInputStream(in);
 		unzip(zipIn, destDirectory);
 	}
 
@@ -45,7 +46,7 @@ public class UnzipUtility {
 		if (!destDir.exists()) {
 			destDir.mkdir();
 		}
-		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
+		ZipInputStream zipIn = ZipSecurity.createHardenedInputStream(new FileInputStream(zipFilePath));
 		unzip(zipIn, destDirectory);
 	}
 
