@@ -399,11 +399,15 @@ public class ContentValidator {
 				case "text/x-url":
 					if (StringUtils.isBlank(
 							(String) node.getMetadata().get(ContentWorkflowPipelineParams.artifactUrl.name())))
-							throw new ClientException(ContentErrorCodes.INVALID_ARTIFACT.name(),
+							{
+							    throw new ClientException(ContentErrorCodes.INVALID_ARTIFACT.name(),
 									ContentErrorMessageConstants.INVALID_URL,
 									" | [Invalid or 'null' operation.] Publish Operation Failed");
+							}
 						else
-							isValid = true;
+							{
+							    isValid = true;
+							}
 							break;
 
 				case "application/pdf":
