@@ -19,6 +19,7 @@
 		<version.compiler.plugin>2.3.1</version.compiler.plugin>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 
 	<modules>
@@ -88,5 +89,13 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
