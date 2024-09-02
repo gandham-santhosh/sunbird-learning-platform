@@ -258,11 +258,15 @@ public class SyncService extends BaseService implements ISyncService {
                 InputList children = new InputList( new ArrayList<>());
                 fetchChildren(readResponse, children);
                 if (children.isNotEmpty())
-                    ShellCommandUtils.print(input.getId() + " Updating children in destination...");
+                    {
+                        ShellCommandUtils.print(input.getId() + " Updating children in destination...");
+                    }
                     updateData(children, request, channel, forceUpdate);
                     ShellCommandUtils.print(input.getId() + " Updated children in destination...");
                 if (StringUtils.equalsIgnoreCase(COLLECTION_MIMETYPE, (String) destContent.get("mimeType")))
-                    ShellCommandUtils.print(input.getId() + " Syncing Hierarchy updates...");
+                    {
+                        ShellCommandUtils.print(input.getId() + " Syncing Hierarchy updates...");
+                    }
                     syncHierarchy(input.getId());
                     ShellCommandUtils.print(input.getId() + " Synced Hierarchy updates...");
                 if (containsItemsSet(destContent)) {
