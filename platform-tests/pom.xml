@@ -15,6 +15,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<surefire.version>2.19.1</surefire.version>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 
 	<modules>
@@ -114,5 +115,13 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

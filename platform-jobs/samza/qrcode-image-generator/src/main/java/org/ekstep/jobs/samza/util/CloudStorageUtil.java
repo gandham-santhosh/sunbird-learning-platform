@@ -1,5 +1,7 @@
 package org.ekstep.jobs.samza.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.lang3.StringUtils;
 import org.ekstep.common.Platform;
 import org.ekstep.common.exception.ServerException;
@@ -49,7 +51,7 @@ public class CloudStorageUtil {
     }
 
     public static void downloadFile(String downloadUrl, File fileToSave) throws IOException {
-        URL url = new URL(downloadUrl);
+        URL url = Urls.create(downloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
         FileOutputStream fileOutputStream = new FileOutputStream(fileToSave);
         FileChannel fileChannel = fileOutputStream.getChannel();

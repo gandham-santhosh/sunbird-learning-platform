@@ -1,5 +1,7 @@
 package org.ekstep.content.operation.finalizer;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -161,7 +163,7 @@ public class BaseFinalizer extends BasePipeline {
 	private boolean isS3Url(String url) {
 		if (null != url) {
 			try {
-				new URL(url.toString());
+				Urls.create(url.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 				if (StringUtils.containsIgnoreCase(url, "s3") && StringUtils.containsIgnoreCase(url, "ekstep-public")) {
 					return true;
 				}
@@ -220,7 +222,7 @@ public class BaseFinalizer extends BasePipeline {
 				HttpURLConnection httpConn = null;
 				TelemetryManager.log("Start Downloading for File: " + stageIconId);
 
-				URL url = new URL(stageIconFile);
+				URL url = Urls.create(stageIconFile, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 				httpConn = (HttpURLConnection) url.openConnection();
 				int responseCode = httpConn.getResponseCode();
 				TelemetryManager.log("Response Code: " + responseCode);

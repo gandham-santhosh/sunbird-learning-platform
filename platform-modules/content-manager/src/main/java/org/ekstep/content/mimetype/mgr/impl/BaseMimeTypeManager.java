@@ -1,5 +1,7 @@
 package org.ekstep.content.mimetype.mgr.impl;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -172,7 +174,7 @@ public class BaseMimeTypeManager extends BaseLearningManager {
 		try {
 			String fileName = getFieNameFromURL(fileUrl);
 			File file = new File(fileName);
-			FileUtils.copyURLToFile(new URL(fileUrl), file);
+			FileUtils.copyURLToFile(Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), file);
 			return file;
 		} catch (IOException e) {
 			throw new ClientException(TaxonomyErrorCodes.ERR_INVALID_UPLOAD_FILE_URL.name(), "fileUrl is invalid.");

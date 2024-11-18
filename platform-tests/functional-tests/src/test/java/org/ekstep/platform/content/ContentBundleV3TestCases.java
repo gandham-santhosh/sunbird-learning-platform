@@ -2,6 +2,8 @@ package org.ekstep.platform.content;
 
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -1193,7 +1195,7 @@ public class ContentBundleV3TestCases extends BaseTest {
 			String bundleName = "bundle_" + rn + "";
 
 			// Downloading the Ecar from ecar url
-			FileUtils.copyURLToFile(new URL(ecarUrl), new File(downloadPath + "/" + bundleName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(ecarUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + "/" + bundleName + ".zip"));
 			String bundlePath = downloadPath + "/" + bundleName + ".zip";
 
 			// Setting up extract path
@@ -1283,7 +1285,7 @@ public class ContentBundleV3TestCases extends BaseTest {
 			String bundleName = "bundle_" + rn + "";
 
 			// Downloading the Ecar from ecar url
-			FileUtils.copyURLToFile(new URL(ecarUrl), new File(downloadPath + "/" + bundleName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(ecarUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + "/" + bundleName + ".zip"));
 			String bundlePath = downloadPath + "/" + bundleName + ".zip";
 
 			// Setting up extract path

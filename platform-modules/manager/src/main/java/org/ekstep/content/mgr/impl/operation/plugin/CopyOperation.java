@@ -1,5 +1,7 @@
 package org.ekstep.content.mgr.impl.operation.plugin;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
@@ -259,7 +261,7 @@ public class CopyOperation extends BaseContentManager {
         try {
             String fileName = getFileNameFromURL(fileUrl);
             File file = new File(fileName);
-            FileUtils.copyURLToFile(new URL(fileUrl), file);
+            FileUtils.copyURLToFile(Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), file);
             return file;
         } catch (IOException e) {
             throw new ClientException(TaxonomyErrorCodes.ERR_INVALID_UPLOAD_FILE_URL.name(), "fileUrl is invalid.");

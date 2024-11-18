@@ -1,5 +1,7 @@
 package org.ekstep.common.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.FileNotFoundException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,7 +22,7 @@ public class HTTPUrlUtil {
 		URLConnection conn = null;
 		Map<String, Object> metadata = new HashMap<>();
 	    try {
-	    	URL url = new URL(fileUrl);
+	    	URL url = Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 	        conn = (HttpURLConnection)url.openConnection();
 	        if(conn instanceof HttpURLConnection) {
 	            ((HttpURLConnection)conn).setRequestMethod("HEAD");

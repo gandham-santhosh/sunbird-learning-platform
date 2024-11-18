@@ -2,6 +2,8 @@ package org.ekstep.platform.content;
 
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -490,7 +492,7 @@ public class ContentPublishV3Test extends BaseTest{
 
 		try {
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(downloadUrl), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(downloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);
@@ -550,7 +552,7 @@ public class ContentPublishV3Test extends BaseTest{
 
 		try {
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(downloadUrl), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(downloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);
@@ -585,7 +587,7 @@ public class ContentPublishV3Test extends BaseTest{
 		try {
 			assertFalse(mapper.writeValueAsString(rePublishedResponse).contains(assetId));
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(rePublishedDownloadUrl), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(rePublishedDownloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);
@@ -638,7 +640,7 @@ public class ContentPublishV3Test extends BaseTest{
 		assertNull(response.get("result.content.totalCompressedSize"));
 		try {
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(downloadUrl), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(downloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);
@@ -762,7 +764,7 @@ public class ContentPublishV3Test extends BaseTest{
 		File[] files;
 		try {
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(url), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);
@@ -807,7 +809,7 @@ public class ContentPublishV3Test extends BaseTest{
 		File[] files;
 		try {
 			// Download Ecar
-			FileUtils.copyURLToFile(new URL(url), new File(downloadPath + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + ecarName + ".zip"));
 
 			// Extract Ecar
 			File bundleExtract = new File(downloadPath + ecarName);

@@ -2,6 +2,8 @@ package org.ekstep.platform.content;
 
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.File;
 import java.io.FileReader;
@@ -682,10 +684,10 @@ public class EnrichmentConsumerTests extends BaseTest {
 			String ecarName = "ecar_" + rn + "";
 			String uploadFile = "upload_" + rn + "";
 
-			FileUtils.copyURLToFile(new URL(artifactUrl), new File(downloadPath + "/" + uploadFile + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(artifactUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + "/" + uploadFile + ".zip"));
 			String uploadSource = downloadPath + "/" + uploadFile + ".zip";
 
-			FileUtils.copyURLToFile(new URL(downloadUrl), new File(downloadPath + "/" + ecarName + ".zip"));
+			FileUtils.copyURLToFile(Urls.create(downloadUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), new File(downloadPath + "/" + ecarName + ".zip"));
 			String source = downloadPath + "/" + ecarName + ".zip";
 
 			File Destination = new File(downloadPath + "/" + ecarName + "");

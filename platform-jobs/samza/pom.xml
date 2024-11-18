@@ -12,6 +12,7 @@
 		<scala.version>2.11</scala.version>
 		<hadoop.version>2.6.2</hadoop.version>
 		<kafka.version>1.1.0</kafka.version>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 	<groupId>org.ekstep</groupId>
 	<artifactId>samza</artifactId>
@@ -48,4 +49,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

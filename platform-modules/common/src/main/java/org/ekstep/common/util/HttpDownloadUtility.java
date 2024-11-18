@@ -1,5 +1,7 @@
 package org.ekstep.common.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +40,7 @@ public class HttpDownloadUtility {
 		InputStream inputStream = null;
 		FileOutputStream outputStream = null;
 		try {
-			URL url = new URL(fileURL);
+			URL url = Urls.create(fileURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			httpConn = (HttpURLConnection) url.openConnection();
 			int responseCode = httpConn.getResponseCode();
 			TelemetryManager.log("Response Code: " + responseCode);
@@ -116,7 +118,7 @@ public class HttpDownloadUtility {
 	public static boolean isValidUrl(Object url) {
 		if (null != url) {
 			try {
-				new URL(url.toString());
+				Urls.create(url.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			} catch (MalformedURLException e) {
 				return false;
 			}
@@ -144,7 +146,7 @@ public class HttpDownloadUtility {
 		StringBuffer sb = new StringBuffer();
 		try {
 			TelemetryManager.log("The url to be read: " + url);
-			data = new URL(url);
+			data = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			try (BufferedReader in = new BufferedReader(new InputStreamReader(data.openStream()))) {
 				String inputLine;
 				while ((inputLine = in.readLine()) != null)
