@@ -1,5 +1,6 @@
 package org.ekstep.taxonomy.controller;
 
+import io.github.pixee.security.Newlines;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +51,7 @@ public class AssetV2Controller extends BaseController {
 						mimeType = "application/octet-stream";
 					}
 					resp.setContentType(mimeType);
-					resp.setHeader("Content-Disposition", "attachment; filename=" + inputFile.getOriginalFilename());
+					resp.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + inputFile.getOriginalFilename()));
 					resp.setContentLength((int) optimizedFile.length());
 					// send file response
 					FileCopyUtils.copy(optimizedFileStream, resp.getOutputStream());
