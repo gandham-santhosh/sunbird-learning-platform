@@ -1,5 +1,6 @@
 package org.ekstep.taxonomy.controller;
 
+import io.github.pixee.security.Filenames;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ekstep.common.Slug;
@@ -127,8 +128,8 @@ public class ContentV3Controller extends BaseController {
 					TelemetryManager.log("Upload | Response: " + response.getResponseCode());
 					return getResponseEntity(response, apiId, null);
 				} else {
-					String name = FilenameUtils.getBaseName(file.getOriginalFilename()) + UNDERSCORE
-							+ System.currentTimeMillis() + DOT + FilenameUtils.getExtension(file.getOriginalFilename());
+					String name = FilenameUtils.getBaseName(Filenames.toSimpleFileName(file.getOriginalFilename())) + UNDERSCORE
+							+ System.currentTimeMillis() + DOT + FilenameUtils.getExtension(Filenames.toSimpleFileName(file.getOriginalFilename()));
 					File uploadedFile = new File(name);
 					file.transferTo(uploadedFile);
 					uploadedFile = new File(name);

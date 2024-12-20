@@ -1,5 +1,6 @@
 package org.ekstep.taxonomy.controller;
 
+import io.github.pixee.security.Filenames;
 import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
@@ -34,8 +35,8 @@ public class MediaController extends BaseController {
         String apiId = "media.upload";
         TelemetryManager.log("Upload | File: " + file);
         try {
-            String name = FilenameUtils.getBaseName(file.getOriginalFilename()) + "_" + System.currentTimeMillis() + "."
-                    + FilenameUtils.getExtension(file.getOriginalFilename());
+            String name = FilenameUtils.getBaseName(Filenames.toSimpleFileName(file.getOriginalFilename())) + "_" + System.currentTimeMillis() + "."
+                    + FilenameUtils.getExtension(Filenames.toSimpleFileName(file.getOriginalFilename()));
             File uploadedFile = new File(name);
             file.transferTo(uploadedFile);
             String[] urlArray = new String[] {};

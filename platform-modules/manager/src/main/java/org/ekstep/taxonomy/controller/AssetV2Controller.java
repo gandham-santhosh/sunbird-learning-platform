@@ -1,5 +1,6 @@
 package org.ekstep.taxonomy.controller;
 
+import io.github.pixee.security.Filenames;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ public class AssetV2Controller extends BaseController {
 
 		try {
 			String tempFileDwn = tempFileLocation + System.currentTimeMillis() + "_temp";
-			File convInputFile = new File(tempFileDwn, inputFile.getOriginalFilename());
+			File convInputFile = new File(tempFileDwn, Filenames.toSimpleFileName(inputFile.getOriginalFilename()));
 
 			// Create the file using the touch method of the FileUtils class.
 			FileUtils.touch(convInputFile);
